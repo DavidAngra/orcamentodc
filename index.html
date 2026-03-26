@@ -2,9 +2,8 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Modelagem Pro | David Carvalho</title>
-    <link rel="shortcut icon" href="./images/logo_web.ico" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Poppins:wght@700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
@@ -13,20 +12,20 @@
 
 <div class="container main-page">
     <nav class="top-bar no-print">
-        <div class="status-save" id="save-status">Sincronizado localmente</div>
-        <button class="btn-outline" onclick="limparRascunho()">Limpar Orçamento</button>
+        <div id="save-status">Sincronizado</div>
+        <button class="btn-outline" onclick="limparRascunho()">Limpar Tudo</button>
     </nav>
 
     <header class="header-main">
         <div class="header-left">
             <h1 class="doc-title">ORÇAMENTO</h1>
-            <p class="doc-subtitle">PROPOSTA DE SERVIÇOS TÉCNICOS</p>
+            <p class="doc-subtitle">SERVIÇOS TÉCNICOS</p>
         </div>
         <div class="header-right">
             <div class="brand-logo">
                 <div class="brand-text">
                     <h2>David Carvalho</h2>
-                    <p>Modelagem Computadorizada</p>
+                    <p>Modelagem Digital</p>
                 </div>
                 <div class="logo-icon">DC</div>
             </div>
@@ -35,8 +34,8 @@
 
     <section class="meta-strip">
         <div class="meta-item">
-            <span class="meta-label">DATA DE EMISSÃO</span>
-            <input type="text" id="data-emissao" class="meta-value input-plain-dark">
+            <span class="meta-label">DATA EMISSÃO</span>
+            <input type="text" id="data-emissao" class="meta-value">
         </div>
         <div class="meta-item client-block">
             <span class="meta-label">CLIENTE / EMPRESA</span>
@@ -61,17 +60,17 @@
                     <a href="https://davidcarvalhomodelista.vercel.app/" target="_blank" class="btn-site-styled">ACESSE NOSSO SITE</a>
                 </div>
             </div>
-            <div id="qrcode" class="qr-code-style"></div>
+            <div id="qrcode" class="qr-code-style no-mobile-qr"></div>
         </div>
         <div class="summary-right">
             <div class="total-box-final">
-                <span class="total-label-final">VALOR TOTAL DA PROPOSTA</span>
+                <span class="total-label-final">VALOR TOTAL</span>
                 <span class="total-value-final">R$ <span id="valor-total">0,00</span></span>
             </div>
         </div>
     </footer>
     
-    <button class="btn-print no-print" onclick="window.print()">GERAR PDF / IMPRIMIR ORÇAMENTO</button>
+    <button class="btn-print no-print" onclick="window.print()">GERAR PDF / IMPRIMIR</button>
 </div>
 
 <script src="script.js"></script>
