@@ -1,5 +1,5 @@
 window.onload = () => {
-    const salvo = localStorage.getItem('rascunho_david_responsivo');
+    const salvo = localStorage.getItem('rascunho_david_responsivo_v11');
     if (salvo) {
         const dados = JSON.parse(salvo);
         document.getElementById('cliente-nome').value = dados.cliente || '';
@@ -33,7 +33,8 @@ function adicionarNovoModelo(dadosIniciais = null) {
                 <div class="item-fields-container">
                     <div class="field-row">
                         <input type="text" placeholder="Referência" class="input-field name-input nom-mod" value="${dadosIniciais?.nome || ''}" oninput="salvarTudo()">
-                        <input type="number" placeholder="R$ 0,00" class="input-field price-input pre-mod" value="${dadosIniciais?.preco || ''}" oninput="atualizarSomaTotal()">
+                        
+                        <input type="number" step="0.01" placeholder="0,00" class="input-field price-input pre-mod" value="${dadosIniciais?.preco || ''}" oninput="atualizarSomaTotal()" onblur="formatarInputPreco(this)">
                     </div>
                     <textarea placeholder="Detalhes técnicos..." class="input-field desc-input des-mod" rows="3" oninput="salvarTudo()">${dadosIniciais?.desc || ''}</textarea>
                 </div>
@@ -67,7 +68,7 @@ function salvarTudo() {
             foto: item.querySelector('.foto-box img').src
         });
     });
-    localStorage.setItem('rascunho_david_responsivo', JSON.stringify({
+    localStorage.setItem('rascunho_david_responsivo_v11', JSON.stringify({
         cliente: document.getElementById('cliente-nome').value,
         data: document.getElementById('data-emissao').value,
         modelos: modelos
@@ -78,12 +79,22 @@ function salvarTudo() {
 function atualizarSomaTotal() {
     let total = 0;
     document.querySelectorAll('.pre-mod').forEach(input => total += parseFloat(input.value) || 0);
-    document.getElementById('valor-total').innerText = total.toLocaleString('pt-BR', {minimumFractionDigits: 2});
+    
+    // Cálculo do total geral
+    const totalFormatado = total.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+    document.getElementById('valor-total').innerText = totalFormatado;
+
+    // Cálculo automático das condições de pagamento
+    const metade = total / 2;
+    const metadeFormatada = metade.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+    document.getElementById('valor-entrada').innerText = metadeFormatada;
+    document.getElementById('valor-falta').innerText = metadeFormatada;
+    
     salvarTudo();
 }
 
 function removerModelo(id) {
-    if(confirm("Remover este modelo?")) { document.getElementById(`item-${id}`).remove(); atualizarSomaTotal(); }
+    if(confirm("Remover este modelo do orçamento?")) { document.getElementById(`item-${id}`).remove(); atualizarSomaTotal(); }
 }
 
 function gerarQRCode() {
@@ -93,5 +104,20 @@ function gerarQRCode() {
 }
 
 function limparRascunho() {
-    if(confirm("Deseja apagar todo o orçamento?")) { localStorage.removeItem('rascunho_david_responsivo'); location.reload(); }
+    if(confirm("Deseja apagar este orçamento por completo?")) { localStorage.removeItem('rascunho_david_responsivo_v11'); location.reload(); }
+}
+
+// NOVA FUNÇÃO: Formata o preço com 2 dígitos depois da vírgula ao sair do campo
+function formatarInputPreco(inputElement) {
+    let valorRaw = inputElement.value;
+    if (!valorRaw) {
+        return; // Não faz nada se o campo estiver vazio
+    }
+
+    // A propriedade input type="number" do navegador gerencia o locale.
+    // Usamos parseFloat para ler o número e toFixed(2) para forçar as 2 casas decimais.
+    let valor = parseFloat(valorRaw);
+    if (!isNaN(valor)) {
+        inputElement.value = valor.toFixed(2);
+    }
 }

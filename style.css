@@ -61,17 +61,13 @@ body {
 /* Footer Responsivo */
 .footer-summary { display: grid; grid-template-columns: 1fr 280px; padding: 30px 40px; gap: 30px; align-items: start; }
 .total-box-final { background: var(--primary); color: white; padding: 25px 20px; text-align: right; border-radius: 6px; }
-.total-label-final { font-size: 11px; font-weight: 600; color: #9ca3af; display: block; margin-bottom: 5px; }
+.total-label-final { font-size: 10px; font-weight: 600; color: #9ca3af; display: block; margin-bottom: 5px; }
 .total-value-final { font-size: 28px; font-weight: 800; color: var(--accent); }
 
 .thank-you { font-size: 16px; font-weight: 700; margin-bottom: 15px; color: var(--primary); }
-
 .terms-box { font-size: 12px; line-height: 1.5; margin-bottom: 20px; color: #4b5563; }
 .terms-box p { margin: 5px 0; }
-
 .contact-info-list { font-size: 13px; border-top: 1px solid var(--border); padding-top: 15px; }
-.contact-info-list p { margin: 5px 0; }
-
 .btn-site-styled { display: inline-block; background: var(--primary); color: white; text-decoration: none; padding: 8px 12px; border-radius: 4px; font-size: 10px; font-weight: 700; margin-top: 10px; }
 
 .btn-add, .btn-print { width: calc(100% - 40px); margin: 10px 20px 20px; padding: 12px; font-weight: 800; border-radius: 6px; cursor: pointer; border: none; }
