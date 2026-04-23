@@ -5,16 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Modelagem Pro | David Carvalho</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="./images/logo_web.ico" type="image/x-icon">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 <body>
 
-<div class="container main-page">
+<div class="container main-page" id="app">
     <nav class="top-bar no-print">
-        <div id="save-status">Sincronizado</div>
-        <button class="btn-outline" onclick="limparRascunho()">Limpar Tudo</button>
+        <div id="save-status" aria-live="polite">Sincronizado</div>
+        <button class="btn-outline" id="btn-limpar" aria-label="Limpar todo o orçamento">Limpar Tudo</button>
     </nav>
 
     <header class="header-main">
@@ -28,32 +28,32 @@
                     <h2>David Carvalho</h2>
                     <p>Modelagem Digital</p>
                 </div>
-                <div class="logo-icon">DC</div>
+                <div class="logo-icon" aria-hidden="true">DC</div>
             </div>
         </div>
     </header>
 
-    <section class="meta-strip">
+    <section class="meta-strip" aria-label="Informações do orçamento">
         <div class="meta-item">
-            <span class="meta-label">DATA EMISSÃO</span>
-            <input type="text" id="data-emissao" class="meta-value">
+            <label for="data-emissao" class="meta-label">DATA EMISSÃO</label>
+            <input type="text" id="data-emissao" class="meta-value" readonly aria-label="Data de emissão">
         </div>
         <div class="meta-item client-block">
-            <span class="meta-label">CLIENTE / EMPRESA</span>
-            <input type="text" id="cliente-nome" placeholder="NOME DO CLIENTE" class="meta-value client-input" oninput="salvarTudo()">
+            <label for="cliente-nome" class="meta-label">CLIENTE / EMPRESA</label>
+            <input type="text" id="cliente-nome" placeholder="NOME DO CLIENTE" class="meta-value client-input" aria-label="Nome do cliente" autocomplete="off">
         </div>
     </section>
 
-    <div id="lista-modelos"></div>
+    <section id="lista-modelos" aria-label="Modelos do orçamento"></section>
 
     <div class="actions-add no-print">
-        <button class="btn-add" onclick="adicionarNovoModelo()">+ ADICIONAR NOVO MODELO</button>
+        <button class="btn-add" id="btn-adicionar" aria-label="Adicionar novo modelo ao orçamento">+ ADICIONAR NOVO MODELO</button>
     </div>
 
     <footer class="footer-summary">
         <div class="summary-left">
             <p class="thank-you">Obrigado pela preferência!</p>
-            
+
             <div class="terms-box">
                 <p>Para darmos início ao processo pedimos entrada de 50% (R$ <span id="valor-entrada">0,00</span>) e o valor restante (R$ <span id="valor-falta">0,00</span>) na finalização da modelagem.</p>
                 <p><strong>Prazo para entrega:</strong> até 7 dias úteis.</p>
@@ -63,10 +63,10 @@
                 <p><strong>WhatsApp:</strong> (85) 99917-1800</p>
                 <p><strong>E-mail:</strong> davidcarvalhomodelista@gmail.com</p>
                 <div class="site-button-wrapper">
-                    <a href="https://davidcarvalhomodelista.vercel.app/" target="_blank" class="btn-site-styled">ACESSE NOSSO SITE</a>
+                    <a href="https://davidcarvalhomodelista.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn-site-styled">ACESSE NOSSO SITE</a>
                 </div>
             </div>
-            <div id="qrcode" class="qr-code-style no-mobile-qr"></div>
+            <div id="qrcode" class="qr-code-style no-mobile-qr" aria-label="QR Code WhatsApp"></div>
         </div>
         <div class="summary-right">
             <div class="total-box-final">
@@ -75,9 +75,11 @@
             </div>
         </div>
     </footer>
-    
-    <button class="btn-print no-print" onclick="window.print()">GERAR PDF / IMPRIMIR</button>
+
+    <button class="btn-print no-print" id="btn-imprimir" aria-label="Gerar PDF ou imprimir orçamento">GERAR PDF / IMPRIMIR</button>
 </div>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
 
 <script src="script.js"></script>
 </body>
